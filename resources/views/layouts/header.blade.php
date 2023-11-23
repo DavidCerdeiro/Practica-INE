@@ -6,7 +6,12 @@
         <button type="submit" class="button" style="margin-left:10px;">Buscar</button>
       </form>
       <div class="d-flex justify-content-end">
-        <a href="#" class="link">Autenticación</a>
+        @if(Auth::check())
+          <a href="{{ route('dashboard') }}" class="link">{{ Auth::user()->name }}</a>
+          <a href="{{route('user.logout') }}" class="link">X</a>
+        @else
+          <a href="{{ route('login') }}" class="link">Autenticación</a>
+        @endif
         <a href=" {{ route('cart.show') }}">
           <img src="{{ asset('img/carrito.png') }}" class="carrito">
           @php $var2 = session()->get('cart', new App\Models\Cart()) @endphp
